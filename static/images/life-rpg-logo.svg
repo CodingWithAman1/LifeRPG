@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Life RPG emblem</title>
+  <desc id="desc">A teal shield with a bright plus symbol</desc>
+  <path d="M32 4 55 12v17c0 14-9 25-23 31C18 54 9 43 9 29V12L32 4Z" fill="#2dd4ee" fill-opacity=".16" stroke="#2dd4ee" stroke-width="3"/>
+  <path d="M32 12 47 17v12c0 9-5 17-15 22-10-5-15-13-15-22V17l15-5Z" fill="#0b1720" stroke="#8af3ff" stroke-width="1.5"/>
+  <path d="M29 20h6v9h9v6h-9v9h-6v-9h-9v-6h9v-9Z" fill="#f5b942"/>
+</svg>

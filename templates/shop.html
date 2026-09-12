@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Shop | Life RPG</title>
+
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <aside class="sidebar">
+
+        <div class="logo" aria-label="Life RPG">
+            <img class="brand-logo-image" src="{{ url_for('static', filename='images/life-rpg-logo.svg') }}" alt="">
+            <span class="brand-name">LIFE</span>
+            <span class="brand-accent">RPG</span>
+        </div>
+
+        <nav>
+
+            <a href="/dashboard">
+                🏠 Dashboard
+            </a>
+
+            <a href="/quests">
+                ⚔ Quests
+            </a>
+
+            <a href="/character">
+                🧬 Character
+            </a>
+
+            <a href="/shop" class="active">
+                🛒 Shop
+            </a>
+
+            <a href="/achievements">
+                🏆 Achievements
+            </a>
+
+        </nav>
+
+        <button type="button"
+                class="theme-toggle">
+            ☀ Light Mode
+        </button>
+
+        <button id="logoutBtn"
+                class="logout-btn">
+            🚪 Logout
+        </button>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="page-header shop-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    ITEM TERMINAL
+                </p>
+
+                <h1>
+                    RPG SHOP
+                </h1>
+
+                <p>
+                    Spend your hard-earned Gold.
+                </p>
+
+            </div>
+
+
+            <div class="shop-wallet">
+
+                <span>🪙</span>
+
+                <strong id="goldValue">
+                    0
+                </strong>
+
+                <small>
+                    GOLD
+                </small>
+
+            </div>
+
+        </header>
+
+
+        <section>
+
+            <div class="section-title">
+
+                <span>
+                    AVATARS
+                </span>
+
+            </div>
+
+
+            <div class="shop-grid">
+
+
+                <div class="shop-card">
+
+                    <div class="shop-icon">
+                        🧙
+                    </div>
+
+                    <h3>
+                        CYBER MAGE
+                    </h3>
+
+                    <p>
+                        A master of digital arcane power.
+                    </p>
+
+                    <button
+                        class="buy-btn"
+                        data-item="cyber_mage"
+                        data-name="Cyber Mage"
+                        data-price="250">
+
+                        🪙 250 — BUY
+
+                    </button>
+
+                </div>
+
+
+                <div class="shop-card">
+
+                    <div class="shop-icon">
+                        🤖
+                    </div>
+
+                    <h3>
+                        CYBER BOT
+                    </h3>
+
+                    <p>
+                        Built for relentless productivity.
+                    </p>
+
+                    <button
+                        class="buy-btn"
+                        data-item="cyber_bot"
+                        data-name="Cyber Bot"
+                        data-price="400">
+
+                        🪙 400 — BUY
+
+                    </button>
+
+                </div>
+
+
+                <div class="shop-card">
+
+                    <div class="shop-icon">
+                        🥷
+                    </div>
+
+                    <h3>
+                        SHADOW RUNNER
+                    </h3>
+
+                    <p>
+                        Silent. Fast. Disciplined.
+                    </p>
+
+                    <button
+                        class="buy-btn"
+                        data-item="shadow_runner"
+                        data-name="Shadow Runner"
+                        data-price="600">
+
+                        🪙 600 — BUY
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="shop-section">
+
+            <div class="section-title">
+
+                <span>
+                    COSMETICS
+                </span>
+
+            </div>
+
+
+            <div class="shop-grid">
+
+
+                <div class="shop-card">
+
+                    <div class="shop-icon">
+                        🌌
+                    </div>
+
+                    <h3>
+                        NEON FRAME
+                    </h3>
+
+                    <p>
+                        Give your character a glowing frame.
+                    </p>
+
+                    <button
+                        class="buy-btn"
+                        data-item="neon_frame"
+                        data-name="Neon Frame"
+                        data-price="300">
+
+                        🪙 300 — BUY
+
+                    </button>
+
+                </div>
+
+
+                <div class="shop-card">
+
+                    <div class="shop-icon">
+                        💎
+                    </div>
+
+                    <h3>
+                        ELITE BADGE
+                    </h3>
+
+                    <p>
+                        Show everyone that you're elite.
+                    </p>
+
+                    <button
+                        class="buy-btn"
+                        data-item="elite_badge"
+                        data-name="Elite Badge"
+                        data-price="500">
+
+                        🪙 500 — BUY
+
+                    </button>
+
+                </div>
+
+
+                <div class="shop-card">
+
+                    <div class="shop-icon">
+                        👑
+                    </div>
+
+                    <h3>
+                        LEGEND CROWN
+                    </h3>
+
+                    <p>
+                        Reserved for true legends.
+                    </p>
+
+                    <button
+                        class="buy-btn"
+                        data-item="legend_crown"
+                        data-name="Legend Crown"
+                        data-price="1000">
+
+                        🪙 1000 — BUY
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script type="module"
+        src="{{ url_for(
+            'static',
+            filename='js/shop.js'
+        ) }}">
+</script>
+
+    <script src="{{ url_for('static', filename='js/sounds.js') }}"></script>
+</body>
+</html>

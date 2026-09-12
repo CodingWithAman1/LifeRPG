@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Character | Life RPG</title>
+
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+<button type="button" class="theme-toggle theme-toggle--floating">☀ Light Mode</button>
+
+<div class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="auth-logo" aria-label="Life RPG">
+            <img class="brand-logo-image" src="{{ url_for('static', filename='images/life-rpg-logo.svg') }}" alt="">
+            <span class="brand-name">LIFE</span>
+            <span class="brand-accent">RPG</span>
+        </div>
+
+        <div class="auth-icon">
+            ⚔
+        </div>
+
+        <h1>Create Your Character</h1>
+
+        <p class="auth-subtitle">
+            Your adventure begins here.
+        </p>
+
+
+        <form id="registerForm">
+
+            <div class="input-group">
+
+                <label>Character Name</label>
+
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="you@example.com"
+                    required
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Minimum 6 characters"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-button auth-button">
+
+                CREATE CHARACTER →
+
+            </button>
+
+        </form>
+
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+
+        <button
+            id="googleRegister"
+            class="google-button">
+
+            🌐 Continue with Google
+
+        </button>
+
+
+        <p class="auth-footer">
+
+            Already have an account?
+
+            <a href="/login">
+                Login
+            </a>
+
+        </p>
+
+        <p id="authMessage"
+           class="auth-message">
+        </p>
+
+    </div>
+
+</div>
+
+
+<script
+    type="module"
+    src="{{ url_for('static', filename='js/auth.js') }}">
+</script>
+
+
+    <script src="{{ url_for('static', filename='js/sounds.js') }}"></script>
+</body>
+</html>

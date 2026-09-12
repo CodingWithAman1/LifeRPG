@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Quests | Life RPG</title>
+
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body class="dashboard-body">
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo" aria-label="Life RPG">
+        <img class="brand-logo-image" src="{{ url_for('static', filename='images/life-rpg-logo.svg') }}" alt="">
+        <span class="brand-name">LIFE</span>
+        <span class="brand-accent">RPG</span>
+    </div>
+
+    <nav>
+
+        <a href="/dashboard">
+            🏠 Dashboard
+        </a>
+
+        <a href="/quests" class="active">
+            ⚔ Quests
+        </a>
+
+        <a href="/character">
+            🧬 Character
+        </a>
+
+        <a href="/shop">
+            🛒 Shop
+        </a>
+
+        <a href="/achievements">
+            🏆 Achievements
+        </a>
+
+    </nav>
+
+    <button type="button" class="theme-toggle">
+        ☀ Light Mode
+    </button>
+
+    <button id="logoutBtn" class="logout-btn">
+        🚪 Logout
+    </button>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main-content">
+
+
+    <!-- HEADER -->
+
+    <header class="page-header quest-page-header">
+
+        <div>
+
+            <p class="eyebrow">
+                MISSION CONTROL
+            </p>
+
+            <h1>QUESTS</h1>
+
+            <p>Turn your goals into clear, rewarding missions.</p>
+
+        </div>
+
+        <div class="top-stats">
+
+            <div class="top-stat">
+                🔥
+                <span id="streakValue">0</span>
+            </div>
+
+            <div class="top-stat">
+                🪙
+                <span id="goldValue">0</span>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CREATE QUEST -->
+
+    <section class="quest-create-card">
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="system-label">
+                    NEW MISSION
+                </p>
+
+                <h2>
+                    Create Quest
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <form id="questForm">
+
+
+            <div class="form-grid">
+
+
+                <!-- TITLE -->
+
+                <div class="input-group">
+
+                    <label>
+                        Quest Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="questTitle"
+                        placeholder="e.g. Solve 2 DSA Problems"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="input-group">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select id="questCategory">
+
+                        <option value="technology">
+                            💻 Technology
+                        </option>
+
+                        <option value="intelligence">
+                            🧠 Intelligence
+                        </option>
+
+                        <option value="strength">
+                            ⚔ Strength
+                        </option>
+
+                        <option value="health">
+                            ❤️ Health
+                        </option>
+
+                        <option value="discipline">
+                            🎯 Discipline
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- AI PREDICTION -->
+
+                <div class="prediction-panel" aria-live="polite">
+
+    <div class="prediction-heading">
+
+        <span class="system-label">
+            SMART PREDICTION
+        </span>
+
+        <button
+            type="button"
+            id="aiEstimateBtn"
+            class="ai-estimate-btn">
+
+            ✨ ANALYZE QUEST
+
+        </button>
+
+    </div>
+
+    <strong id="predictedDifficulty">
+        EASY
+    </strong>
+
+    <input
+        type="hidden"
+        id="questDifficulty"
+        value="easy"
+    >
+
+    <small id="predictionReason">
+        Add a clear quest title, then analyze the quest.
+    </small>
+
+</div>
+
+                <!-- PREDICTED REWARD -->
+
+                <div class="reward-preview" aria-live="polite">
+
+                    <span class="system-label">PREDICTED REWARD</span>
+
+                    <strong>
+                        <span id="predictedXP">25</span> XP
+                        <span class="reward-divider">•</span>
+                        <span id="predictedGold">5</span> Gold
+                    </strong>
+
+                    <small>
+                        Rewards are based on the prediction.
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-button">
+
+                ⚔ CREATE QUEST
+
+            </button>
+
+
+            <p id="questMessage"
+               class="auth-message">
+            </p>
+
+
+        </form>
+
+    </section>
+
+
+    <!-- QUEST LIST -->
+
+    <section class="quest-list-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="system-label">
+                    ACTIVE MISSIONS
+                </p>
+
+                <h2>
+                    Available Quests
+                </h2>
+
+            </div>
+
+            <span id="questCount"
+                  class="quest-count">
+                0 QUESTS
+            </span>
+
+        </div>
+
+
+        <div id="questList"
+             class="quest-list">
+
+            <div class="quest-loading">
+                Loading quests...
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<script
+    type="module"
+    src="{{ url_for('static', filename='js/quests.js') }}">
+</script>
+
+
+    <script src="{{ url_for('static', filename='js/sounds.js') }}"></script>
+</body>
+
+</html>

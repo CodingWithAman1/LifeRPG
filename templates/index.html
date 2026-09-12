@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Life RPG</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo" aria-label="Life RPG">
+            <img class="brand-logo-image" src="{{ url_for('static', filename='images/life-rpg-logo.svg') }}" alt="">
+            <span class="brand-name">LIFE</span>
+            <span class="brand-accent">RPG</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="/login">Login</a>
+            <a href="/register" class="nav-button">Start Journey</a>
+        </div>
+    </nav>
+
+
+    <main class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                ⚔ YOUR LIFE. YOUR RPG.
+            </div>
+
+            <h1>
+                LEVEL UP<br>
+                <span>YOUR LIFE.</span>
+            </h1>
+
+            <p>
+                Turn your everyday goals into quests,
+                earn XP, unlock achievements and become
+                the strongest version of yourself.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/register" class="primary-button">
+                    START YOUR JOURNEY →
+                </a>
+
+                <a href="/login" class="secondary-button">
+                    I ALREADY HAVE AN ACCOUNT
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-character">
+
+            <div class="character-ring">
+                ⚡
+            </div>
+
+            <div class="floating-card card-one">
+                +100 XP
+            </div>
+
+            <div class="floating-card card-two">
+                🔥 7 DAY STREAK
+            </div>
+
+            <div class="floating-card card-three">
+                🪙 +50 GOLD
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <section class="features">
+
+        <div class="feature">
+            <span>⚔</span>
+            <h3>QUESTS</h3>
+            <p>Turn your goals into exciting daily quests.</p>
+        </div>
+
+        <div class="feature">
+            <span>⚡</span>
+            <h3>LEVEL UP</h3>
+            <p>Earn XP and grow stronger with every achievement.</p>
+        </div>
+
+        <div class="feature">
+            <span>🏆</span>
+            <h3>ACHIEVEMENTS</h3>
+            <p>Unlock badges and prove your progress.</p>
+        </div>
+
+    </section>
+
+    <script src="{{ url_for('static', filename='js/sounds.js') }}"></script>
+</body>
+
+</html>

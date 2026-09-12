@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Life RPG</title>
+
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo" aria-label="Life RPG">
+            <img class="brand-logo-image" src="{{ url_for('static', filename='images/life-rpg-logo.svg') }}" alt="">
+            <span class="brand-name">LIFE</span>
+            <span class="brand-accent">RPG</span>
+        </div>
+
+
+        <nav>
+
+            <a href="/dashboard"
+               class="active">
+                🏠 Dashboard
+            </a>
+
+            <a href="/quests">
+                ⚔ Quests
+            </a>
+
+            <a href="/character">
+                🧬 Character
+            </a>
+
+            <a href="/shop">
+                🛒 Shop
+            </a>
+
+            <a href="/achievements">
+                🏆 Achievements
+            </a>
+
+        </nav>
+
+
+        <button type="button"
+                class="theme-toggle">
+
+            ☀ Light Mode
+
+        </button>
+
+        <button id="logoutBtn"
+                class="logout-btn">
+
+            🚪 Logout
+
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    COMMAND CENTER
+                </p>
+
+                <h1>
+                    Welcome back,
+                    <span id="playerName">
+                        Player
+                    </span>
+                </h1>
+
+                <p>
+                    Ready to level up your life?
+                </p>
+
+            </div>
+
+
+            <div class="dashboard-actions">
+
+                <a href="/quests"
+                   class="primary-action">
+
+                    + NEW QUEST
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- PLAYER HUD -->
+
+        <section class="player-hud">
+
+            <div class="hud-level">
+
+                <div class="level-circle">
+
+                    <span>
+                        LVL
+                    </span>
+
+                    <strong id="levelValue">
+                        1
+                    </strong>
+
+                </div>
+
+
+                <div class="hud-xp">
+
+                    <div class="xp-header">
+
+                        <span>
+                            EXPERIENCE
+                        </span>
+
+                        <span>
+
+                            <b id="xpValue">
+                                0
+                            </b>
+
+                            /
+
+                            <b id="xpRequired">
+                                100
+                            </b>
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="dashboard-xp-bar">
+
+                        <div
+                            id="xpProgress"
+                            class="dashboard-xp-fill">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="hud-stats">
+
+                <div>
+
+                    <span>
+                        🪙
+                    </span>
+
+                    <div>
+
+                        <small>
+                            GOLD
+                        </small>
+
+                        <strong id="goldValue">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        🔥
+                    </span>
+
+                    <div>
+
+                        <small>
+                            STREAK
+                        </small>
+
+                        <strong id="streakValue">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK STATS -->
+
+        <section class="dashboard-section">
+
+            <div class="section-title">
+
+                <span>
+                    CORE ATTRIBUTES
+                </span>
+
+                <a href="/character">
+                    VIEW CHARACTER →
+                </a>
+
+            </div>
+
+
+            <div class="dashboard-attributes">
+
+
+                <div class="mini-attribute">
+
+                    <span>
+                        🧠
+                    </span>
+
+                    <div>
+
+                        <div class="mini-heading">
+
+                            <b>
+                                INTELLIGENCE
+                            </b>
+
+                            <strong id="intelligenceValue">
+                                1
+                            </strong>
+
+                        </div>
+
+                        <div class="mini-bar">
+
+                            <div
+                                id="intelligenceBar">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mini-attribute">
+
+                    <span>
+                        💪
+                    </span>
+
+                    <div>
+
+                        <div class="mini-heading">
+
+                            <b>
+                                STRENGTH
+                            </b>
+
+                            <strong id="strengthValue">
+                                1
+                            </strong>
+
+                        </div>
+
+                        <div class="mini-bar">
+
+                            <div
+                                id="strengthBar">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mini-attribute">
+
+                    <span>
+                        ❤️
+                    </span>
+
+                    <div>
+
+                        <div class="mini-heading">
+
+                            <b>
+                                HEALTH
+                            </b>
+
+                            <strong id="healthValue">
+                                1
+                            </strong>
+
+                        </div>
+
+                        <div class="mini-bar">
+
+                            <div
+                                id="healthBar">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mini-attribute">
+
+                    <span>
+                        🎯
+                    </span>
+
+                    <div>
+
+                        <div class="mini-heading">
+
+                            <b>
+                                DISCIPLINE
+                            </b>
+
+                            <strong id="disciplineValue">
+                                1
+                            </strong>
+
+                        </div>
+
+                        <div class="mini-bar">
+
+                            <div
+                                id="disciplineBar">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mini-attribute">
+
+                    <span>
+                        💻
+                    </span>
+
+                    <div>
+
+                        <div class="mini-heading">
+
+                            <b>
+                                TECHNOLOGY
+                            </b>
+
+                            <strong id="technologyValue">
+                                1
+                            </strong>
+
+                        </div>
+
+                        <div class="mini-bar">
+
+                            <div
+                                id="technologyBar">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUESTS + ACHIEVEMENTS -->
+
+        <div class="dashboard-columns">
+
+
+            <!-- QUESTS -->
+
+            <section class="dashboard-section">
+
+                <div class="section-title">
+
+                    <span>
+                        ACTIVE QUESTS
+                    </span>
+
+                    <a href="/quests">
+                        VIEW ALL →
+                    </a>
+
+                </div>
+
+
+                <div id="dashboardQuestList"
+                     class="dashboard-quest-list">
+
+                    <div class="dashboard-loading">
+                        Loading quests...
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ACHIEVEMENTS -->
+
+            <section class="dashboard-section">
+
+                <div class="section-title">
+
+                    <span>
+                        ACHIEVEMENTS
+                    </span>
+
+                    <a href="/achievements">
+                        VIEW ALL →
+                    </a>
+
+                </div>
+
+
+                <div
+                    id="dashboardAchievements"
+                    class="dashboard-achievements">
+
+                    <div class="dashboard-loading">
+                        Loading...
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script type="module"
+        src="{{ url_for(
+            'static',
+            filename='js/dashboard.js'
+        ) }}">
+</script>
+
+    <script src="{{ url_for('static', filename='js/sounds.js') }}"></script>
+</body>
+
+</html>

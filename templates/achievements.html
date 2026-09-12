@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Achievements | Life RPG</title>
+
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo" aria-label="Life RPG">
+            <img class="brand-logo-image" src="{{ url_for('static', filename='images/life-rpg-logo.svg') }}" alt="">
+            <span class="brand-name">LIFE</span>
+            <span class="brand-accent">RPG</span>
+        </div>
+
+        <nav>
+
+            <a href="/dashboard">
+                🏠 Dashboard
+            </a>
+
+            <a href="/quests">
+                ⚔ Quests
+            </a>
+
+            <a href="/character">
+                🧬 Character
+            </a>
+
+            <a href="/shop">
+                🛒 Shop
+            </a>
+
+            <a href="/achievements"
+               class="active">
+                🏆 Achievements
+            </a>
+
+        </nav>
+
+        <button type="button" class="theme-toggle">
+            ☀ Light Mode
+        </button>
+
+        <button id="logoutBtn"
+                class="logout-btn">
+            🚪 Logout
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <header class="page-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    HALL OF FAME
+                </p>
+
+                <h1>
+                    ACHIEVEMENTS
+                </h1>
+
+                <p>
+                    Prove what you're capable of.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- PROGRESS -->
+
+        <section class="achievement-progress">
+
+            <div>
+
+                <span>
+                    ACHIEVEMENT PROGRESS
+                </span>
+
+                <strong id="achievementCount">
+                    0 / 5
+                </strong>
+
+            </div>
+
+            <div class="achievement-progress-bar">
+
+                <div id="achievementProgress">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACHIEVEMENTS -->
+
+        <section>
+
+            <div id="achievementGrid"
+                 class="achievement-grid">
+
+                <div class="achievement-loading">
+                    Loading achievements...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script type="module"
+        src="{{ url_for(
+            'static',
+            filename='js/achievements.js'
+        ) }}">
+</script>
+
+    <script src="{{ url_for('static', filename='js/sounds.js') }}"></script>
+</body>
+
+</html>

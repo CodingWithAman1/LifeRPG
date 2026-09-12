@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Character | Life RPG</title>
+
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo" aria-label="Life RPG">
+            <img class="brand-logo-image" src="{{ url_for('static', filename='images/life-rpg-logo.svg') }}" alt="">
+            <span class="brand-name">LIFE</span>
+            <span class="brand-accent">RPG</span>
+        </div>
+
+        <nav>
+
+            <a href="/dashboard">
+                🏠 Dashboard
+            </a>
+
+            <a href="/quests">
+                ⚔ Quests
+            </a>
+
+            <a href="/character" class="active">
+                🧬 Character
+            </a>
+
+            <a href="/shop">
+                🛒 Shop
+            </a>
+
+            <a href="/achievements">
+                🏆 Achievements
+            </a>
+
+        </nav>
+
+        <button type="button" class="theme-toggle">
+            ☀ Light Mode
+        </button>
+
+        <button id="logoutBtn" class="logout-btn">
+            🚪 Logout
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <header class="page-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    PLAYER PROFILE
+                </p>
+
+                <h1>
+                    CHARACTER
+                </h1>
+
+                <p>
+                    Your real-life progression, visualized.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- CHARACTER HERO -->
+
+        <section class="character-hero">
+
+            <div class="character-avatar">
+
+                <div class="avatar-ring">
+                    🧙
+                </div>
+
+            </div>
+
+
+            <div class="character-info">
+
+                <p class="character-label">
+                    PLAYER
+                </p>
+
+                <h2 id="playerName">
+                    Loading...
+                </h2>
+
+                <div class="level-badge">
+
+                    LEVEL
+                    <span id="levelValue">
+                        1
+                    </span>
+
+                </div>
+
+                <div class="xp-section">
+
+                    <div class="xp-text">
+
+                        <span>
+                            XP
+                        </span>
+
+                        <span>
+                            <b id="xpValue">0</b>
+                            /
+                            <b id="xpRequired">100</b>
+                        </span>
+
+                    </div>
+
+                    <div class="xp-bar">
+
+                        <div
+                            id="xpProgress"
+                            class="xp-progress">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ATTRIBUTES -->
+
+        <section class="character-section">
+
+            <div class="section-title">
+
+                <span>
+                    CORE ATTRIBUTES
+                </span>
+
+                <small>
+                    YOUR REAL-WORLD SKILLS
+                </small>
+
+            </div>
+
+
+            <div class="attribute-grid">
+
+
+                <div class="attribute-card">
+
+                    <div class="attribute-icon">
+                        🧠
+                    </div>
+
+                    <div class="attribute-details">
+
+                        <div class="attribute-heading">
+
+                            <span>
+                                INTELLIGENCE
+                            </span>
+
+                            <b id="intelligenceValue">
+                                1
+                            </b>
+
+                        </div>
+
+                        <div class="attribute-bar">
+
+                            <div
+                                id="intelligenceBar"
+                                class="attribute-fill">
+                            </div>
+
+                        </div>
+
+                        <small>
+                            Study • Learning • Problem Solving
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="attribute-card">
+
+                    <div class="attribute-icon">
+                        💪
+                    </div>
+
+                    <div class="attribute-details">
+
+                        <div class="attribute-heading">
+
+                            <span>
+                                STRENGTH
+                            </span>
+
+                            <b id="strengthValue">
+                                1
+                            </b>
+
+                        </div>
+
+                        <div class="attribute-bar">
+
+                            <div
+                                id="strengthBar"
+                                class="attribute-fill">
+                            </div>
+
+                        </div>
+
+                        <small>
+                            Exercise • Physical Tasks
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="attribute-card">
+
+                    <div class="attribute-icon">
+                        ❤️
+                    </div>
+
+                    <div class="attribute-details">
+
+                        <div class="attribute-heading">
+
+                            <span>
+                                HEALTH
+                            </span>
+
+                            <b id="healthValue">
+                                1
+                            </b>
+
+                        </div>
+
+                        <div class="attribute-bar">
+
+                            <div
+                                id="healthBar"
+                                class="attribute-fill">
+                            </div>
+
+                        </div>
+
+                        <small>
+                            Fitness • Wellness • Recovery
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="attribute-card">
+
+                    <div class="attribute-icon">
+                        🎯
+                    </div>
+
+                    <div class="attribute-details">
+
+                        <div class="attribute-heading">
+
+                            <span>
+                                DISCIPLINE
+                            </span>
+
+                            <b id="disciplineValue">
+                                1
+                            </b>
+
+                        </div>
+
+                        <div class="attribute-bar">
+
+                            <div
+                                id="disciplineBar"
+                                class="attribute-fill">
+                            </div>
+
+                        </div>
+
+                        <small>
+                            Habits • Consistency • Focus
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="attribute-card">
+
+                    <div class="attribute-icon">
+                        💻
+                    </div>
+
+                    <div class="attribute-details">
+
+                        <div class="attribute-heading">
+
+                            <span>
+                                TECHNOLOGY
+                            </span>
+
+                            <b id="technologyValue">
+                                1
+                            </b>
+
+                        </div>
+
+                        <div class="attribute-bar">
+
+                            <div
+                                id="technologyBar"
+                                class="attribute-fill">
+                            </div>
+
+                        </div>
+
+                        <small>
+                            Coding • Digital Skills
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RPG STATS -->
+
+        <section class="character-section">
+
+            <div class="section-title">
+
+                <span>
+                    RPG STATISTICS
+                </span>
+
+            </div>
+
+
+            <div class="stat-grid">
+
+                <div class="stat-box">
+
+                    <span class="stat-icon">
+                        🪙
+                    </span>
+
+                    <div>
+
+                        <small>
+                            GOLD
+                        </small>
+
+                        <strong id="goldValue">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-box">
+
+                    <span class="stat-icon">
+                        🔥
+                    </span>
+
+                    <div>
+
+                        <small>
+                            STREAK
+                        </small>
+
+                        <strong id="streakValue">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-box">
+
+                    <span class="stat-icon">
+                        ⚔️
+                    </span>
+
+                    <div>
+
+                        <small>
+                            TOTAL QUESTS
+                        </small>
+
+                        <strong id="questCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script type="module"
+        src="{{ url_for('static', filename='js/character.js') }}">
+</script>
+
+    <script src="{{ url_for('static', filename='js/sounds.js') }}"></script>
+</body>
+</html>
