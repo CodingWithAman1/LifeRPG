@@ -8,6 +8,8 @@ import {
 import {
     collection,
     addDoc,
+    writeBatch,
+    increment,
     deleteDoc,
     doc,
     getDoc,
@@ -706,11 +708,116 @@ function renderQuest(quest) {
         )
         .addEventListener(
             "click",
-            () => {
+            async (event) => {
 
-                alert(
-                    "Quest completion engine coming next! ⚔️"
-                );
+                const button = event.currentTarget;
+
+                button.disabled = true;
+                button.textContent = "COMPLETING...";
+
+                try {
+
+                    const userRef = doc(
+                        db,
+                        "users",
+                        currentUser.uid
+                    );
+
+                    const questRef = doc(
+                        db,
+                        "quests",
+                        quest.id
+                    );
+
+                    const userSnapshot = await getDoc(userRef);
+                    const latestQuest = await getDoc(questRef);
+
+                    if (!userSnapshot.exists()) {
+                        throw new Error("Player profile not found.");
+                    }
+
+                    if (!latestQuest.exists() || latestQuest.data().completed) {
+                        await loadQuests();
+                        return;
+                    }
+
+                    const player = userSnapshot.data();
+                    const questXp = Number(latestQuest.data().xp) || 0;
+                    const newXp = (Number(player.xp) || 0) + questXp;
+                    let newLevel = Number(player.level) || 1;
+
+                    while (
+                        newXp >= Math.floor(100 * Math.pow(newLevel, 1.5))
+                    ) {
+                        newLevel += 1;
+                    }
+
+                    const category = String(
+                        latestQuest.data().category || "discipline"
+                    ).toLowerCase();
+
+                    const attribute = [
+                        "intelligence",
+                        "strength",
+                        "health",
+                        "discipline",
+                        "technology"
+                    ].includes(category)
+                        ? category
+                        : "discipline";
+
+                    const batch = writeBatch(db);
+
+                    batch.update(questRef, {
+                        completed: true,
+                        completedAt: new Date().toISOString()
+                    });
+
+                    batch.update(userRef, {
+                        xp: increment(questXp),
+                        gold: increment(latestQuest.data().gold || 0),
+                        streak: increment(1),
+                        level: newLevel,
+                        [attribute]: increment(1)
+                    });
+
+                    await batch.commit();
+                    window.lifeRpgSounds?.play("questComplete");
+
+                    if (newLevel > (Number(player.level) || 1)) {
+                        window.lifeRpgSounds?.play("levelUp");
+                        showLevelUpPopup(
+                            newLevel,
+                            questXp,
+                            Number(latestQuest.data().gold) || 0
+                        );
+                    }
+
+                    else {
+                        showRewardPopup(
+                            questXp,
+                            Number(latestQuest.data().gold) || 0
+                        );
+                    }
+
+                    showMessage("QUEST COMPLETE! REWARDS CLAIMED.", false);
+                    await loadPlayerStats();
+                    await loadQuests();
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Quest completion failed:",
+                        error
+                    );
+
+                    button.disabled = false;
+                    button.textContent = "⚔ COMPLETE";
+                    showMessage("Could not complete quest.", true);
+
+                }
 
             }
         );
@@ -913,6 +1020,90 @@ if (logoutBtn) {
             }
 
         }
+    );
+
+}
+
+
+// =========================================
+// CELEBRATION POPUPS
+// =========================================
+
+function showRewardPopup(
+    xp,
+    gold
+) {
+
+    const popup = document.createElement("div");
+
+    popup.className = "reward-popup show";
+    popup.innerHTML = `
+        <div class="reward-content">
+            <div class="reward-icon">⚔</div>
+            <h2>QUEST COMPLETE</h2>
+            <div class="reward-items">
+                <span>+${xp} XP</span>
+                <span>+${gold} GOLD</span>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(popup);
+    dismissPopup(popup);
+
+}
+
+
+function showLevelUpPopup(
+    level,
+    xp,
+    gold
+) {
+
+    const popup = document.createElement("div");
+
+    popup.className = "levelup-popup show";
+    popup.innerHTML = `
+        <div>
+            <div class="levelup-icon">🏆</div>
+            <h1>LEVEL UP</h1>
+            <p>LEVEL ${level}</p>
+            <p>+${xp} XP &bull; +${gold} GOLD</p>
+            <button type="button">CONTINUE</button>
+        </div>
+    `;
+
+    document.body.appendChild(popup);
+    popup.querySelector("button").addEventListener(
+        "click",
+        () => dismissPopup(popup)
+    );
+
+}
+
+
+function dismissPopup(
+    popup
+) {
+
+    const close = () => {
+        popup.classList.remove("show");
+        setTimeout(
+            () => popup.remove(),
+            300
+        );
+    };
+
+    popup.addEventListener(
+        "click",
+        (event) => {
+            if (event.target === popup) close();
+        }
+    );
+
+    setTimeout(
+        close,
+        3500
     );
 
 }

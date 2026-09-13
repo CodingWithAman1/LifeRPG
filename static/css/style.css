@@ -2683,3 +2683,77 @@ a {
     }
 
 }
+
+/* =========================================================
+   AMBIENT LIVE BACKGROUND
+   Always-on, pure-CSS drifting starfield + slow aurora glow,
+   layered behind every page. No images/GIFs/JS needed — it
+   just keeps looping forever, so the app always feels "alive".
+   Respects the existing prefers-reduced-motion rule above,
+   which disables all animation for users who need that.
+========================================================= */
+
+html::after {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    z-index: -3;
+    pointer-events: none;
+    opacity: 0.55;
+    background:
+        radial-gradient(circle at 20% 30%, var(--violet-dim), transparent 40%),
+        radial-gradient(circle at 80% 20%, var(--mana-dim), transparent 38%),
+        radial-gradient(circle at 30% 82%, var(--gold-dim), transparent 36%),
+        radial-gradient(circle at 78% 75%, var(--violet-dim), transparent 40%);
+    background-repeat: no-repeat;
+    filter: blur(14px);
+    animation: auroraDrift 28s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes auroraDrift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25%      { transform: translate(3%, -4%) scale(1.06); }
+    50%      { transform: translate(-2%, 3%) scale(0.97); }
+    75%      { transform: translate(-4%, -2%) scale(1.04); }
+}
+
+/* drifting starfield — a repeating tile translated by exactly one
+   tile's width/height so the loop is perfectly seamless */
+body::after {
+    content: "";
+    position: fixed;
+    inset: -25%;
+    z-index: -2;
+    pointer-events: none;
+    opacity: 0.4;
+    background-image:
+        radial-gradient(1.6px 1.6px at 10% 20%, rgba(244, 242, 251, 0.85), transparent 60%),
+        radial-gradient(1.4px 1.4px at 30% 65%, var(--mana), transparent 60%),
+        radial-gradient(1px 1px at 55% 15%, rgba(244, 242, 251, 0.6), transparent 60%),
+        radial-gradient(2px 2px at 70% 45%, var(--violet-bright), transparent 60%),
+        radial-gradient(1px 1px at 85% 80%, var(--gold), transparent 60%),
+        radial-gradient(1.4px 1.4px at 95% 25%, rgba(244, 242, 251, 0.6), transparent 60%),
+        radial-gradient(1px 1px at 15% 90%, var(--mana), transparent 60%),
+        radial-gradient(1.8px 1.8px at 45% 40%, rgba(244, 242, 251, 0.7), transparent 60%);
+    background-repeat: repeat;
+    background-size: 320px 320px;
+    animation: starDrift 110s linear infinite;
+    will-change: transform;
+}
+
+@keyframes starDrift {
+    from { transform: translate(0, 0); }
+    to   { transform: translate(-320px, -320px); }
+}
+
+/* keep every real layout element painted above the ambient layers */
+.app-layout,
+.dashboard-body,
+.navbar,
+.hero,
+.features,
+.auth-page {
+    position: relative;
+    z-index: 1;
+}
